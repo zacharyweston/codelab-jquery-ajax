@@ -1,0 +1,25 @@
+<!doctype html>
+  <html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <title>Local Farmers Markets</title>
+    </head>
+    <body>
+      <div id="farmers-markets">
+        <p>Loading..</p>
+      </div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+      <script>
+        $.ajax('http://search.ams.usda.gov/farmersmarkets/v1/data.svc/zipSearch?zip=48823')
+          .done(function(response) {
+            $('#farmers-markets').html(
+              '<ul>' +
+                response.results.map(function(event) {
+                  return '<li>' + event.marketname + '</li>'
+                }).join('') +
+              '</ul>'
+            )
+          })
+      </script>
+    </body>
+  </html>
